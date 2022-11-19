@@ -1,19 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
-import { GoogleOAuthProvider } from "@react-oauth/google";
+import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import NavigationMenu from "./components/NavigationMenu/NavigationMenu";
 
 export default function App() {
   const [count, setCount] = useState(0);
 
-  const CLIENT_ID = import.meta.env.VITE_VITE_GOOGLE_AUTH_CLIENT_ID;
+  const CLIENT_ID = import.meta.env.VITE_GOOGLE_AUTH_CLIENT_ID;
+
+  useEffect(() => console.log(import.meta.env.VITE_GOOGLE_AUTH_CLIENT_ID), []);
 
   return (
     <React.Fragment>
       <GoogleOAuthProvider clientId={CLIENT_ID}>
         <NavigationMenu />
-
+        <GoogleLogin
+          onSuccess={(credentialResponse) => {
+            console.log(credentialResponse);
+          }}
+          onError={() => {
+            console.log("Login Failed");
+          }}
+          useOneTap
+          auto_select
+        />
+        ;
         <div className="App">
           <div>
             <a href="https://vitejs.dev" target="_blank">
