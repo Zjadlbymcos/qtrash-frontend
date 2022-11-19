@@ -8,7 +8,9 @@ export type GoogleCodeResponse = Omit<
 
 export async function redeemCode(code: GoogleCodeResponse) {
   try {
-    const { data } = await axios.post<{ token: string }>(`/code`, code);
+    console.log(code);
+    const params = new URLSearchParams(code).toString();
+    const { data } = await axios.get<any>(`/connect/google/check?${params}`);
 
     return data;
   } catch (error: unknown) {
