@@ -1,7 +1,7 @@
 import styles from './Cart.module.css';
 
 type Props = {
-  children: JSX.Element;
+  children: JSX.Element | string;
 };
 
 const Cart: React.FC<Props> = (props: Props) => {
