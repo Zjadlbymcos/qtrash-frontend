@@ -5,8 +5,6 @@ import NavigationMenu from './components/NavigationMenu/NavigationMenu';
 import Page from './components/Page/Page';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div className="App">
       <Router>
