@@ -2,9 +2,10 @@ import { Button, FormControl, Input, InputLabel } from '@mui/material';
 import { useContext, useState } from 'react';
 import { getTrash } from '../../api/trash';
 import { StoreContext } from '../../store/StoreProvider';
-import styles from './Search.module.css';
+import Cart from '../Cart/Cart';
+import styles from './Scan.module.css';
 
-const Search = () => {
+const Scan = () => {
   const [enteredCode, setEnteredCode] = useState('');
   const context = useContext(StoreContext);
 
@@ -29,18 +30,26 @@ const Search = () => {
   };
 
   return (
-    <form onSubmit={onSubmitHandler}>
-      <FormControl className={styles.input}>
-        <InputLabel htmlFor="code">Code</InputLabel>
-        <Input id="code" type="number" value={enteredCode} onChange={onInputChangeHandler} />
-      </FormControl>
-      <FormControl className={styles.action}>
-        <Button variant="contained" type="submit">
-          Search
-        </Button>
-      </FormControl>
-    </form>
+    <Cart>
+      <form onSubmit={onSubmitHandler}>
+        <FormControl className={styles.input}>
+          <InputLabel htmlFor="code">Code</InputLabel>
+          <Input
+            id="code"
+            type="number"
+            className={styles.input}
+            value={enteredCode}
+            onChange={onInputChangeHandler}
+          />
+        </FormControl>
+        <FormControl className={styles.action}>
+          <Button variant="contained" type="submit">
+            Scan
+          </Button>
+        </FormControl>
+      </form>
+    </Cart>
   );
 };
 
-export default Search;
+export default Scan;
