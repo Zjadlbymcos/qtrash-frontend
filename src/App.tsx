@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import NavigationMenu from "./components/NavigationMenu/NavigationMenu";
 
-function App() {
+export default function App() {
   const [count, setCount] = useState(0);
 
   const CLIENT_ID = import.meta.env.VITE_VITE_GOOGLE_AUTH_CLIENT_ID;
@@ -11,6 +12,8 @@ function App() {
   return (
     <React.Fragment>
       <GoogleOAuthProvider clientId={CLIENT_ID}>
+        <NavigationMenu />
+
         <div className="App">
           <div>
             <a href="https://vitejs.dev" target="_blank">
@@ -37,5 +40,3 @@ function App() {
     </React.Fragment>
   );
 }
-
-export default App;
