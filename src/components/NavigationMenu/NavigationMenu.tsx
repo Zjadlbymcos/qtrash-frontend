@@ -1,10 +1,32 @@
 import { AppBar, Toolbar, Button, Grid, Menu, MenuItem } from "@mui/material";
-import { GoogleLogin } from "@react-oauth/google";
+import {
+  CodeResponse,
+  CredentialResponse,
+  GoogleLogin,
+  useGoogleLogin,
+} from "@react-oauth/google";
+import { useContext, useEffect } from "react";
+import { StoreContext } from "../../store/StoreProvider";
 
 const NavigationMenu = () => {
-  const onLoginHandler = () => {};
+  const {
+    auth: [auth, setAuth],
+  } = useContext(StoreContext);
 
-  const CLIENT_ID = import.meta.env.VITE_GOOGLE_AUTH_CLIENT_ID;
+  const handleLoginSuccess = (
+    code: Omit<CodeResponse, "error" | "error_description" | "error_uri">
+  ) => {
+    console.log(code);
+  };
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: handleLoginSuccess,
+    flow: "auth-code",
+  });
+
+  useEffect(() => {
+    console.log("store update", auth);
+  }, [auth]);
 
   return (
     <AppBar position="static">
@@ -15,17 +37,11 @@ const NavigationMenu = () => {
           </Grid>
 
           <Grid item xs={4}>
-            <GoogleLogin
-              onSuccess={(credentialResponse) => {
-                console.log(credentialResponse);
-              }}
-              onError={() => {
-                console.log("Login Failed");
-              }}
-              useOneTap
-              auto_select
-            />
-            <Button variant="outlined" color="inherit" onClick={onLoginHandler}>
+            <Button
+              variant="outlined"
+              color="inherit"
+              onClick={() => googleLogin()}
+            >
               LOGIN
             </Button>
           </Grid>
