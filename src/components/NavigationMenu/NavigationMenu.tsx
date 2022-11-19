@@ -6,6 +6,7 @@ import {
   useGoogleLogin,
 } from "@react-oauth/google";
 import { useContext, useEffect } from "react";
+import { redeemCode } from "../../api/user";
 import { StoreContext } from "../../store/StoreProvider";
 
 const NavigationMenu = () => {
@@ -13,10 +14,12 @@ const NavigationMenu = () => {
     auth: [auth, setAuth],
   } = useContext(StoreContext);
 
-  const handleLoginSuccess = (
+  const handleLoginSuccess = async (
     code: Omit<CodeResponse, "error" | "error_description" | "error_uri">
   ) => {
-    console.log(code);
+    const apiAuth = await redeemCode(code);
+
+    setAuth(apiAuth);
   };
 
   const googleLogin = useGoogleLogin({
