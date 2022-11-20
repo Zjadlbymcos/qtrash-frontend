@@ -2,7 +2,7 @@ import { Button, FormControl, Input, InputLabel } from '@mui/material';
 import { useContext, useState } from 'react';
 import { getTrash } from '../../api/trash';
 import { StoreContext } from '../../store/StoreProvider';
-import Cart from '../Cart/Cart';
+import Cart from '../Card/Card';
 import styles from './ScanForm.module.css';
 
 const ScanForm = () => {

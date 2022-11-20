@@ -1,7 +1,7 @@
 import { CredentialResponse } from '@react-oauth/google';
 import React, { createContext, ReactNode, useReducer } from 'react';
 
-type Trash = {
+export type Trash = {
   code: string;
   title: string;
   description: string;
@@ -29,7 +29,15 @@ export const StoreContext = createContext<Store>(null!);
 
 export function StoreProvider({ children }: StoreProviderProps) {
   const auth = React.useState<AuthStore>(null!);
-  const trash = React.useState<TrashStore>(null!);
+  const trash = React.useState<TrashStore>(null!); /*{
+    trash: {
+      code: '12345',
+      title: 'template title bla bla.',
+      description: 'longer text blab lab lab lbalbla blab alba blalba blabab alblab a',
+      imageUrl:
+        'https://dictionary.cambridge.org/pl/images/thumb/trashb_noun_002_38838.jpg?version=5.0.274',
+    },
+  });*/
 
   const store = {
     auth,

@@ -1,7 +1,8 @@
-import styles from './Cart.module.css';
+import { ReactNode } from 'react';
+import styles from './Card.module.css';
 
 type Props = {
-  children: JSX.Element | string;
+  children: ReactNode;
 };
 
 const Cart: React.FC<Props> = (props: Props) => {

@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { StoreContext } from '../../store/StoreProvider';
 import ScanForm from './ScanForm';
-import TrashDescription from './TrashDescription';
+import TrashCard from './TrashCard';
 
 const Scan = () => {
+  const context = useContext(StoreContext);
+
+  const trash = context.trash[0]?.trash;
+  const trashLoaded = trash != null;
+
   return (
     <React.Fragment>
       <ScanForm />
-      <TrashDescription />
+      {trashLoaded && <TrashCard trash={trash} />}
     </React.Fragment>
   );
 };
